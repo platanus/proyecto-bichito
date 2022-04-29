@@ -115,12 +115,96 @@ e)  numero_1 = 2
 '''
 
 # Puedes modificar los valores de estas variables
-numero_1 = 2
-numero_2 = 4
-numero_3 = 0
+numero_1 = 32
+numero_2 = 0
+numero_3 = 32
 print("Estado Inicial: " + str(numero_1) +
       " " + str(numero_2) + " " + str(numero_3))
-direccion = input("Escribe izquierda o derecha: ")
-
 
 # Aquí abajo escribe tu código
+
+nuevo_numero = 2
+cantidad_de_turnos = 2
+turno_actual = 1
+
+while turno_actual <= cantidad_de_turnos:
+    numero_1_anterior = numero_1
+    numero_2_anterior = numero_2
+    numero_3_anterior = numero_3
+
+    direccion = input("Escribe izquierda o derecha: ")
+
+    if direccion == "izquierda":
+        if numero_1 != 0:
+            if numero_1 == numero_2:
+                numero_1 = numero_1 + numero_2
+                numero_2 = numero_3
+                numero_3 = 0
+            elif numero_1 == numero_3 and numero_2 == 0:
+                numero_1 = numero_1 + numero_3
+                numero_3 = 0
+            elif numero_2 == numero_3 and numero_2 != 0:
+                numero_2 = numero_2 + numero_3
+                numero_3 = 0
+            elif numero_2 == 0:
+                numero_2 = numero_3
+                numero_3 = 0
+        elif numero_2 != 0:
+            if numero_2 == numero_3:
+                numero_1 = numero_2 + numero_3
+                numero_2 = 0
+                numero_3 = 0
+            else:
+                numero_1 = numero_2
+                numero_2 = numero_3
+                numero_3 = 0
+        elif numero_3 != 0:
+            numero_1 = numero_3
+            numero_2 = 0
+            numero_3 = 0
+    elif direccion == "derecha":
+        if numero_3 != 0:
+            if numero_3 == numero_2:
+                numero_3 = numero_3 + numero_2
+                numero_2 = numero_1
+                numero_1 = 0
+            elif numero_1 == numero_3 and numero_2 == 0:
+                numero_3 = numero_1 + numero_3
+                numero_1 = 0
+            elif numero_1 == numero_2 and numero_2 != 0:
+                numero_2 = numero_1 + numero_2
+                numero_1 = 0
+            elif numero_2 == 0:
+                numero_2 = numero_1
+                numero_1 = 0
+        elif numero_2 != 0:
+            if numero_2 == numero_1:
+                numero_3 = numero_2 + numero_1
+                numero_2 = 0
+                numero_1 = 0
+            else:
+                numero_3 = numero_2
+                numero_2 = numero_1
+                numero_1 = 0
+        elif numero_1 != 0:
+            numero_3 = numero_1
+            numero_2 = 0
+            numero_1 = 0
+
+    if (numero_1 == numero_1_anterior and numero_2 == numero_2_anterior and numero_3 == numero_3_anterior):
+        print("Movimiento inválido")
+        continue
+    else:
+        print("Movimiento válido")
+        # Agregamos el nuevo valor 2
+        if numero_1 == 0:
+            numero_1 = 2
+        elif numero_2 == 0:
+            numero_2 = 2
+        elif numero_3 == 0:
+            numero_3 = 2
+        # Imprimimos resultado
+        print(str(numero_1) + " " + str(numero_2) + " " + str(numero_3))
+
+        # Avanzamos el turno
+        turno_actual += 1
